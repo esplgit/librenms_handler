@@ -370,6 +370,7 @@ class Devices(LibreNMS):  # pylint: disable=R0904
         Please ensure that the ifname is urlencoded if it needs to be (i.e Gi0/1/0 would need to be urlencoded.
         :param columns: Comma separated list of columns you want returned
         """
+        interface_name = interface_name.replace('/','%2F')
         parameters = dict({"columns": columns})
         return get(
             f"{self.url}/{device}/ports/{interface_name}",
@@ -404,6 +405,7 @@ class Devices(LibreNMS):  # pylint: disable=R0904
         :param interface_description: Will use ifDescr to lookup the port instead of ifName when true.
         Pass the ifDescr value you want to search as you would ifName.
         """
+        interface_name = interface_name.replace('/','%2F')
         parameters = dict(
             {
                 "from": date_from,
